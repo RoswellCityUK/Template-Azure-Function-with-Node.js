@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "func",
+			"label": "func: host start",
+			"command": "host start",
+			"problemMatcher": "$func-node-watch",
+			"isBackground": true,
+			"dependsOn": "yarn watch (functions)"
+		},
+		{
+			"type": "shell",
+			"label": "yarn build (functions)",
+			"command": "yarn run build",
+			"dependsOn": "yarn clean (functions)",
+			"problemMatcher": "$tsc"
+		},
+		{
+			"type": "shell",
+			"label": "yarn watch (functions)",
+			"command": "yarn run watch",
+			"dependsOn": "yarn clean (functions)",
+			"problemMatcher": "$tsc-watch",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"isBackground": true
+		},
+		{
+			"type": "shell",
+			"label": "yarn install (functions)",
+			"command": "yarn install"
+		},
+		{
+			"type": "shell",
+			"label": "yarn prune (functions)",
+			"command": "yarn prune --production",
+			"dependsOn": "yarn build (functions)",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "yarn clean (functions)",
+			"command": "yarn run clean",
+			"dependsOn": "yarn install (functions)"
+		}
+	]
+}
